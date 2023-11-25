@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+  </head>
+  <style>
+    .form {
+      width: 50%;
+      margin: auto;
+      margin-top: 50px;
+      box-shadow: 10px 10px 20px lightcyan;
+    }
+    .label {
+      font-size: 20px;
+      font-weight: 700;
+      margin: auto;
+    }
+    .button {
+      padding: 10px;
+      color: white;
+      background-color: red;
+      width: 90px;
+      margin: auto;
+      border: 12px;
+      justify-content: center;
+    }
+    .input {
+      padding: 10px;
+      border-radius: 15px;
+    }
+  </style>
+  <body>
+    <form class="form">
+      <label class="label">Enter Your Name</label>
+      <br />
+      <br />
+      <input
+        type="text"
+        placeholder="Enter Your Name"
+        class="input"
+        id="input"
+      />
+      <br />
+      <br />
+      <button class="button">Submit</button>
+    </form>
+    <div class="data" id="data"></div>
+  </body>
+  <script>
+    let todoArray = JSON.parse(localStorage.getItem("todoVal")) || [];
+    console.log(todoArray, "jajsas");
+    const data = document.getElementById("data");
+    document.querySelector(".button").addEventListener("click", handleInput);
+    const input = document.getElementById("input");
+    function handleInput(e) {
+      e.preventDefault();
+      let value = input.value;
+      let val = {
+        date: Date.now(),
+        value,
+      };
+      todoArray.push(val);
+      localStorage.setItem("todoVal", JSON.stringify(todoArray));
+      DataAdded();
+    }
+
+    function DataAdded() {
+      data.innerHTML = "";
+
+      todoArray.forEach((el, index) => {
+        let h1 = document.createElement("h1");
+        h1.innerText = el.value;
+        let button = document.createElement("button");
+        button.innerText = "Delete";
+        button.addEventListener("click", function () {
+          handleDelete(index);
+        });
+        data.append(h1, button);
+      });
+    }
+    DataAdded();
+    function handleDelete(el) {
+      console.log("kaskha", el);
+      todoArray.splice(el, 1);
+      localStorage.setItem("todoVal", JSON.stringify(todoArray));
+      DataAdded();
+    }
+  </script>
+</html>

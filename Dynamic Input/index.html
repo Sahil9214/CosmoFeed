@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style></style>
+    <title>Dynamic Form</title>
+  </head>
+  <body>
+    <div id="dynamic"></div>
+    <button id="Add">Add Field</button>
+    <button id="submit">Submit</button>
+
+    <script>
+      let dynamic = document.getElementById("dynamic");
+      let arr = [];
+      let add = document
+        .getElementById("Add")
+        .addEventListener("click", handleInput);
+      function handleInput(e) {
+        e.preventDefault();
+        console.log("hello")
+        let input = document.createElement("input");
+        let remove = document.createElement("button");
+        remove.innerText = "Remove Field";
+
+       
+        arr.push(obj);
+        dynamic.append(arr);
+      }
+    </script>
+  </body>
+</html>
